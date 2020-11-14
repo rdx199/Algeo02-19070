@@ -10,8 +10,12 @@ __all__ = (
     'VektorKata',
     'similiarity',
     'VektorBuilder',
+    'load_vektor',
+    'save_vektor',
 )
 
+
+import sys
 
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
@@ -25,6 +29,10 @@ class VektorKata:
     def __init__(self, list_kata):
         self._set = frozenset(list_kata)
 
+    def __repr__(self):
+        return f'VektorKata({{{", ".join(self._set)!s}}})'
+    def __str__(self):
+        return f'{{{" ".join(self._set)!s}}}'
     def __len__(self):
         return len(self._set)
     def __iter__(self):
@@ -55,5 +63,10 @@ def similiarity(v1, v2):
 class VektorBuilder:
     @staticmethod
     def build_vektor(string):
-        import sys
         return VektorKata(map(sys.intern, stemmer.stem(string).split()))
+
+def load_vektor(f):
+    return VektorKata(map(sys.intern, f.read(-1).split()))
+
+def save_vektor(f, v):
+    f.write(' '.join(v))

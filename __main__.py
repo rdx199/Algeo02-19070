@@ -8,12 +8,27 @@
 import vektorkata
 import html_getter
 
-url = 'http://id.wikipedia.org'
+queries = dict()
+
+def sort_similiarity(v):
+    l = [(i, vektorkata.similiarity(v, v2)) for (i, v2) in queries.items()]
+    l.sort(key=lambda x: x[1])
+    return l
 
 def main():
-    s = html_getter.get_url(url)
+    for i in range(15):
+        try:
+            with open(f'query_{i:d}.txt', 'rt') as f:
+                queries[i] = vektorkata.load_vektor(f)
+        except OSError:
+            pass
+    print(queries)
+
+def populate():
+    s = html_getter.get_url('https://id.wikipedia.org')
     v = vektorkata.VektorBuilder.build_vektor(s)
-    print(*v)
+    with open('query_0.txt', 'wt') as f:
+        vektorkata.save_vektor(f, v)
 
 if __name__ == '__main__':
     main()
