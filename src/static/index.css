@@ -34,3 +34,19 @@ form.search::after {
   clear: both;
   display: table;
 }
+table {
+  border-collapse: collapse;
+}
+table th {
+  text-align: left;
+  background-color: #ffae17;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+table td {
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+table tr:nth-child(odd) td {
+  background-color: #ffe2ac;
+}

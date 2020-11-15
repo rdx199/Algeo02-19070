@@ -24,7 +24,7 @@ def search():
     word_queries[-1] = to_list(words, v)
     words = list(enumerate(words))
     lengths = {i: len(v) for (i, (_, v)) in queries.items()}
-    kalimat = {i: html_getter.get_file_unclean(f'test/query_{i}.html')[:100]+"..." for (i, (url, _)) in queries.items()}
+    kalimat = {i: html_getter.get_file_unclean(f'test/query_{i}.html')[:150]+"..." for (i, (url, _)) in queries.items()}
     return render_template("search.html",
                            queries=queries,
                            term=term,
@@ -32,8 +32,7 @@ def search():
                            lengths=lengths,
                            kalimat=kalimat,
                            words=words,
-                           word_queries=word_queries,
-                           )
+                           word_queries=word_queries)
 
 def all_words(term):
     return list(sum(map(lambda x: x[1], queries.values()), term))

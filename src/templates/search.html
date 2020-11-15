@@ -26,7 +26,7 @@
       <!--- Untuk pemanbahan variabel, tambahkan argumen keyword di render_template --->
       
       {% for i, similiarity in search %}
-        <p>{{i}}. <a href={{queries[i][0]}}>{{queries[i][0]}}</a></p>
+        <p><a href={{queries[i][0]}}>{{queries[i][0]}}</a></p>
         <p>Jumlah kata: {{lengths[i]}}</p>
         <p>Tingkat kemiripan: {{similiarity}}</p>
         <p>{{kalimat[i]}}</p><br>
