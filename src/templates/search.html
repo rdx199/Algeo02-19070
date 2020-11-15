@@ -8,7 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}" />
-    <title>Search Result</title>
+    <title>Search Result: {{term}}</title>
   </head>
   <body>
     <h1><center>My Simple Search Engine</center></h1>
@@ -38,14 +38,40 @@
           <th>D1</th>
           <th>D2</th>
           <th>D3</th>
+          <th>D4</th>
+          <th>D5</th>
+          <th>D6</th>
+          <th>D7</th>
+          <th>D8</th>
+          <th>D9</th>
+          <th>D10</th>
+          <th>D11</th>
+          <th>D12</th>
+          <th>D13</th>
+          <th>D14</th>
+          <th>D15</th>
         </tr>
+        {% for i, word in words %}
         <tr>
-          <td>Term1</td>
-          <td>...</td>
-          <td>...</td>
-          <td>...</td>
-          <td>...</td>
+          <td>{{word}}</td>
+          <td>{{word_queries[-1][i]}}</td>
+          <td>{{word_queries[0][i]}}</td>
+          <td>{{word_queries[1][i]}}</td>
+          <td>{{word_queries[2][i]}}</td>
+          <td>{{word_queries[3][i]}}</td>
+          <td>{{word_queries[4][i]}}</td>
+          <td>{{word_queries[5][i]}}</td>
+          <td>{{word_queries[6][i]}}</td>
+          <td>{{word_queries[7][i]}}</td>
+          <td>{{word_queries[8][i]}}</td>
+          <td>{{word_queries[9][i]}}</td>
+          <td>{{word_queries[10][i]}}</td>
+          <td>{{word_queries[11][i]}}</td>
+          <td>{{word_queries[12][i]}}</td>
+          <td>{{word_queries[13][i]}}</td>
+          <td>{{word_queries[14][i]}}</td>
         </tr>
+        {% endfor %}
       </table>
     </div>
   </body>

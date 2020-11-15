@@ -1,3 +1,4 @@
+from collections import defaultdict
 from flask import Flask, render_template, request
 
 import vektorkata, html_getter
@@ -16,12 +17,23 @@ def search():
         term = request.form['query']
     v = vektorkata.VektorBuilder.build_vektor(term)
     l = sort_similiarity(v)
-    print(all_words(v))
+    words = all_words(v)
+    words.sort()
+    word_queries = defaultdict(lambda l=len(words): [0]*l)
+    word_queries.update({i: to_list(words, v) for (i, (_, v)) in queries.items()})
+    word_queries[-1] = to_list(words, v)
+    words = list(enumerate(words))
+    lengths = {i: len(v) for (i, (_, v)) in queries.items()}
+    kalimat = {i: html_getter.get_file_unclean(f'test/query_{i}.html')[:100]+"..." for (i, (url, _)) in queries.items()}
     return render_template("search.html",
                            queries=queries,
+                           term=term,
                            search=l,
-                           lengths={i: len(v[1]) for (i, v) in queries.items()},
-                           kalimat={i: html_getter.get_url_unclean(url)[:100]+"..." for (i, (url, _)) in queries.items()})
+                           lengths=lengths,
+                           kalimat=kalimat,
+                           words=words,
+                           word_queries=word_queries,
+                           )
 
 def all_words(term):
     return list(sum(map(lambda x: x[1], queries.values()), term))
@@ -37,6 +49,3 @@ def sort_similiarity(v):
 def init(*, _queries):
     global queries
     queries = _queries
-
-if __name__ == "__main__":
-    app.run(debug=True)
