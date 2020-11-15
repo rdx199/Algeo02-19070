@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-import vektorkata
+import vektorkata, html_getter
 
 app = Flask(__name__)
 
@@ -19,7 +19,9 @@ def search():
     print(all_words(v))
     return render_template("search.html",
                            queries=queries,
-                           search=l)
+                           search=l,
+                           lengths={i: len(v[1]) for (i, v) in queries.items()},
+                           kalimat={i: html_getter.get_url_unclean(url)[:100]+"..." for (i, (url, _)) in queries.items()})
 
 def all_words(term):
     return list(sum(map(lambda x: x[1], queries.values()), term))

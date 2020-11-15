@@ -76,3 +76,12 @@ def get_url(url):
             parser.feed(s)
             s = f.read(1024)
         return parser.get_string().casefold().translate(_allowed_chars)
+
+def get_url_unclean(url):
+    with io.TextIOWrapper(urllib.request.urlopen(url), 'utf-8') as f:
+        parser = Parser()
+        s = f.read(1024)
+        while s:
+            parser.feed(s)
+            s = f.read(1024)
+        return ' '.join(parser.get_string().split())

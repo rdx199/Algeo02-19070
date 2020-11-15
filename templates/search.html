@@ -7,7 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/static/index.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}" />
     <title>Search Result</title>
   </head>
   <body>
@@ -24,11 +24,29 @@
     <div class="hasil">
       <h3><center>Hasil Pencarian</center></h3>
       <!--- Untuk pemanbahan variabel, tambahkan argumen keyword di render_template --->
-      <!--- Penggunaan template gunakan {{}} untuk substitusi, {%%} untuk statemen spesial --->
+      
       {% for i, similiarity in search %}
-        <a href={{queries[i][0]}}>{{queries[i][0]}}</a>
-        {{similiarity}}
+        <p>{{i}}. <a href={{queries[i][0]}}>{{queries[i][0]}}</a></p>
+        <p>Jumlah kata: {{lengths[i]}}</p>
+        <p>Tingkat kemiripan: {{similiarity}}</p>
+        <p>{{kalimat[i]}}</p><br>
       {% endfor %}
+      <table>
+        <tr>
+          <th>Term</th>
+          <th>Query</th>
+          <th>D1</th>
+          <th>D2</th>
+          <th>D3</th>
+        </tr>
+        <tr>
+          <td>Term1</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+      </table>
     </div>
   </body>
 </html>
