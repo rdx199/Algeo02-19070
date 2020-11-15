@@ -18,6 +18,9 @@ import html.parser
 
 _parse_tags = {
     'p',
+    'h1',
+    'h2',
+    'h3',
 }
 _no_parse_tags = {
     'script',

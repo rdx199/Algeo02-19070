@@ -5,30 +5,36 @@
     Main file.
 """
 
+from urllib.error import URLError
+
 import vektorkata
 import html_getter
+import app
+
+urlfile = 'urls.txt'
 
 queries = dict()
 
-def sort_similiarity(v):
-    l = [(i, vektorkata.similiarity(v, v2)) for (i, v2) in queries.items()]
-    l.sort(key=lambda x: x[1])
-    return l
-
 def main():
-    for i in range(15):
+    with open(urlfile, 'rt') as f:
+        urls = f.read(-1).split()
+    for i in range(len(urls)):
         try:
             with open(f'query_{i:d}.txt', 'rt') as f:
-                queries[i] = vektorkata.load_vektor(f)
+                queries[i] = (urls[i], vektorkata.load_vektor(f))
         except OSError:
-            pass
+            print(f'Membaca {urls[i]}')
+            try:
+                s = html_getter.get_url(urls[i])
+            except URLError:
+                continue
+            v = vektorkata.VektorBuilder.build_vektor(s)
+            with open(f'query_{i:d}.txt', 'wt') as f:
+                vektorkata.save_vektor(f, v)
+            queries[i] = (urls[i], v)
     print(queries)
-
-def populate():
-    s = html_getter.get_url('https://id.wikipedia.org')
-    v = vektorkata.VektorBuilder.build_vektor(s)
-    with open('query_0.txt', 'wt') as f:
-        vektorkata.save_vektor(f, v)
+    app.init(_queries=queries)
+    app.app.run()
 
 if __name__ == '__main__':
     main()

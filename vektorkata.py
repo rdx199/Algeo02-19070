@@ -47,6 +47,8 @@ class VektorKata:
     def __hash__(self):
         return hash(self._set)
 
+    def __add__(self, other):
+        return VektorKata(self._set | other._set)
     def __mul__(self, other):
         return sum(1 for i in self._set if i in other._set)
 
