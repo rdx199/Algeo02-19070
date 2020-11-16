@@ -24,6 +24,11 @@ _parse_tags = {
     'h1',
     'h2',
     'h3',
+    'h4',
+    'h5',
+    'tr',
+    'th',
+    'td',
 }
 _no_parse_tags = {
     'script',
@@ -34,7 +39,7 @@ class Parser(html.parser.HTMLParser):
     def __init__(self):
         super().__init__()
         self.__list = [[]]
-        self.__incdata = [False]
+        self.__incdata = []
 
     def get_string(self):
         return ' '.join(s for l in self.__list for s in l)
@@ -49,13 +54,15 @@ class Parser(html.parser.HTMLParser):
             return
 
     def handle_endtag(self, tag):
+        if len(self.__incdata) == 0:
+            return
         if tag in _parse_tags or tag in _no_parse_tags:
             if self.__incdata.pop():
                 ret = ''.join(self.__list.pop())
                 self.__list[-1].append(ret)
 
     def handle_data(self, data):
-        if self.__incdata[-1]:
+        if self.__incdata and self.__incdata[-1]:
             self.__list[-1].append(data)
 
 
