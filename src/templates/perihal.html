@@ -3,7 +3,7 @@
   <head>
     <title>Perihal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="perihal.css" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='perihal.css')}}" />
   </head>
   <body>
     <div class="back">
@@ -14,7 +14,7 @@
         <h1>The Developer</h1>
         <div class="card">
           <div class="box">
-            <img src="hiro1.png" alt="team img" />
+            <img src="{{url_for('static', filename='hiro1.png')}}" alt="team img" />
             <h4>Hiro Agayeff</h4>
             <h5>13519070</h5>
             <p>Teknik Informatika</p>
@@ -22,7 +22,7 @@
         </div>
         <div class="card">
           <div class="box">
-            <img src="haniff.jpg" alt="team img" />
+            <img src="{{url_for('static', filename='haniff.jpg')}}" alt="team img" />
             <h4>Hanif Arroisi</h4>
             <h5>13519072</h5>
             <p>Teknik Informatika</p>
@@ -30,8 +30,8 @@
         </div>
         <div class="card">
           <div class="box">
-            <img src="ojann.jpg" alt="team img" />
-            <h4>Fauzan Yubairi</h4>
+            <img src="{{url_for('static', filename='ojann.jpg')}}" alt="team img" />
+            <h4>Fauzan Y. Indrayadi</h4>
             <h5>13519171</h5>
             <p>Teknik Informatika</p>
           </div>

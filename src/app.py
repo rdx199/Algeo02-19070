@@ -32,7 +32,12 @@ def search():
                            lengths=lengths,
                            kalimat=kalimat,
                            words=words,
-                           word_queries=word_queries)
+                           word_queries=word_queries
+                           )
+
+@app.route("/perihal")
+def perihal():
+    return render_template("perihal.html")
 
 def all_words(term):
     return list(sum(map(lambda x: x[1], queries.values()), term))

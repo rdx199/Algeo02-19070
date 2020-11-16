@@ -23,8 +23,6 @@
     </form>
     <div class="hasil">
       <h3><center>Hasil Pencarian</center></h3>
-      <!--- Untuk pemanbahan variabel, tambahkan argumen keyword di render_template --->
-      
       {% for i, similiarity in search %}
         <p><a href={{queries[i][0]}}>{{queries[i][0]}}</a></p>
         <p>Jumlah kata: {{lengths[i]}}</p>
@@ -73,6 +71,10 @@
         </tr>
         {% endfor %}
       </table>
+    </div>
+    <div class="perihal">
+      <p></p>
+      <p><a href="perihal"><center>Perihal</center></a></p>
     </div>
   </body>
 </html>
